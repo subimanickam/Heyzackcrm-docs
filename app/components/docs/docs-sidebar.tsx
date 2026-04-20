@@ -95,6 +95,13 @@ interface SidebarNodeProps {
   level: number
 }
 
+function getSidebarNodeLabel(node: Node): Node['name'] | 'Get started' {
+  if (node.type === 'page' && node.url === '/docs') {
+    return 'Get started'
+  }
+  return node.name
+}
+
 function SidebarNode({ node, pathname, level }: SidebarNodeProps) {
   if (node.type === 'separator') {
     return (
@@ -110,7 +117,7 @@ function SidebarNode({ node, pathname, level }: SidebarNodeProps) {
     return (
       <div>
         <span className="block py-1 text-sm font-medium text-muted-foreground">
-          {node.name}
+          {getSidebarNodeLabel(node)}
         </span>
         {node.children && (
           <ul className="ml-3 mt-1 space-y-0.5 border-l border-border pl-3">
@@ -136,7 +143,7 @@ function SidebarNode({ node, pathname, level }: SidebarNodeProps) {
             : 'text-muted-foreground hover:text-foreground'
         )}
       >
-        <span>{node.name}</span>
+        <span>{getSidebarNodeLabel(node)}</span>
       </Link>
     </li>
   )

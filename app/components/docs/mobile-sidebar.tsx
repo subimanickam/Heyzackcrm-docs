@@ -225,6 +225,13 @@ interface MobileSidebarNodeProps {
   onNavigate: () => void
 }
 
+function getSidebarNodeLabel(node: Node): Node['name'] | 'Get started' {
+  if (node.type === 'page' && node.url === '/docs') {
+    return 'Get started'
+  }
+  return node.name
+}
+
 function MobileSidebarNode({ node, pathname, onNavigate }: MobileSidebarNodeProps) {
   const [isExpanded, setIsExpanded] = useState(true)
 
@@ -282,7 +289,7 @@ function MobileSidebarNode({ node, pathname, onNavigate }: MobileSidebarNodeProp
             : 'text-muted-foreground hover:text-foreground hover:bg-muted'
         )}
       >
-        <span>{node.name}</span>
+        <span>{getSidebarNodeLabel(node)}</span>
       </Link>
     </li>
   )

@@ -14,13 +14,13 @@ interface PageProps {
 
 // Find the section separator that precedes this page in the tree
 function findSectionName(tree: Root, pageUrl: string): string {
-  let lastSeparator = 'Documentation'
+  let lastSeparator = 'Get started'
 
   function traverse(nodes: Node[]): string | null {
     for (const node of nodes) {
       if (node.type === 'separator') {
         // node.name can be ReactNode, convert to string safely
-        lastSeparator = typeof node.name === 'string' ? node.name : 'Documentation'
+        lastSeparator = typeof node.name === 'string' ? node.name : 'Get started'
       } else if (node.type === 'page' && node.url === pageUrl) {
         return lastSeparator
       } else if (node.type === 'folder' && node.children) {
