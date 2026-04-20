@@ -1,0 +1,45 @@
+---
+title: "Authenticate with the Heyzack Partner Portal"
+description: "Learn how to sign in to the portal, obtain a bearer token for API access, and handle token expiry and common authentication errors."
+---
+
+The Heyzack Partner Portal uses email and password authentication for browser-based access. For API access, every request must include a bearer token in the `Authorization` header. This page explains how to sign in, where to find your token, and how to handle common authentication errors.
+
+## Signing in to the portal
+
+Navigate to the portal login page. Enter your email address and password, then click **Sign in**.
+
+If you've forgotten your password, click **Forgot password** on the sign-in page. Enter your email address to receive a password reset link.
+
+<Tip>
+  If you don't have an account, ask your admin to create one for you in **Settings → Create User**.
+</Tip>
+
+## Using the API
+
+All API requests must include a valid bearer token in the `Authorization` header:
+
+```http
+Authorization: Bearer <your-token>
+```
+
+Your token is issued when you sign in to the portal. To use it in API clients or scripts, copy it from your browser session after signing in.
+
+<Note>
+  Keep your token private. Anyone with your token can make API requests on your behalf. Do not share it or commit it to source control.
+</Note>
+
+## Token expiry and refresh
+
+Tokens have a limited lifespan. If your token expires, any API request you make will return a `401 Unauthorized` response.
+
+To get a fresh token, sign in to the portal again. The new token is available immediately for subsequent API requests.
+
+There is no automatic token refresh — you must sign in again to obtain a new token when the old one expires.
+
+## Common auth errors
+
+| Status | Meaning |
+|--------|---------|
+| 401 | Invalid or expired token. Sign in again to get a fresh token. |
+| 403 | Valid token but insufficient permissions. Your role does not allow access to this resource. Contact your admin to update your permissions. |

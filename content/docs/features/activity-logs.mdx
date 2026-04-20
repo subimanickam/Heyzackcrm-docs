@@ -1,0 +1,63 @@
+---
+title: "Activity logs: audit every action in the portal"
+description: "Review a timestamped record of every user action in the portal — from logins and status changes to payout creation and team management events."
+---
+
+Activity Logs give you a complete, timestamped record of every action taken inside the Heyzack Partner Portal. Every significant event — from a user logging in to a payout being created — is captured automatically, so you always have an accurate picture of what happened, when, and who was responsible.
+
+<Note>
+  Only users with the Activity Logs permission can view this section.
+</Note>
+
+## What is logged
+
+The portal records user-driven actions across all major areas of the system, including:
+
+- **Logins** — when a user signs in to the portal
+- **Installations** — when an installation is created or updated
+- **Leads** — when a lead's status or details change
+- **Orders** — when an order is placed
+- **Payouts** — when a payout record is created
+- **User management** — when users are added, updated, or removed
+
+## Browsing logs
+
+Use the filter bar to narrow down the log list:
+
+- **Search** — type any text to match against the log description, user name, or entity type.
+- **Severity** — filter by Info, Success, Warning, or Error to focus on a specific class of event.
+- **Entity** — filter by entity type (for example, Installation, Payout, or User) to see only logs related to that part of the system.
+
+<Tip>
+  Use the date-based search in combination with the entity filter to quickly narrow down when a specific change was made — for example, filtering by "Payout" and searching for a partner's name to see all payout activity for that partner on a given day.
+</Tip>
+
+## Log entry fields
+
+Each row in the activity log table contains the following fields:
+
+| Field | Description |
+|-------|-------------|
+| Timestamp | The exact date and time the action occurred (displayed as `MMM DD, YYYY HH:mm:ss`) |
+| User | The name and email address of the portal user who performed the action |
+| Action | What was done — for example, `Created`, `Updated`, `Deleted`, `Approved`, `Rejected`, or `Completed` |
+| Entity | The type of record that was affected, such as Installation, Lead, or Payout |
+| Description | A human-readable summary of the specific change that was made |
+| Severity | The outcome level of the action: Info, Success, Warning, or Error |
+
+## Use cases
+
+<CardGroup cols={2}>
+  <Card title="Compliance auditing" icon="file-text">
+    Verify that specific actions were taken at the right time and by the right person to satisfy internal or regulatory requirements.
+  </Card>
+  <Card title="Debugging unusual changes" icon="alert-circle">
+    When something looks wrong — a lead status that changed unexpectedly, a payout that was cancelled — trace it back to the exact action and user that caused it.
+  </Card>
+  <Card title="Tracking team activity" icon="check-circle">
+    Get visibility into what your team is doing in the portal day to day, and confirm that processes are being followed correctly.
+  </Card>
+  <Card title="Investigating errors" icon="x-circle">
+    Use the Error severity filter to surface failed actions and investigate what went wrong and when.
+  </Card>
+</CardGroup>

@@ -1,0 +1,126 @@
+---
+title: "Troubleshooting common issues in the portal"
+description: "Step-by-step solutions for login problems, real-time chat issues, missing installations, lead status errors, and other common Heyzack portal issues."
+---
+
+This page covers the most frequently reported issues in the Heyzack Partner Portal and how to resolve them. Work through the steps for your issue before contacting support — most problems can be resolved without raising a ticket.
+
+## Authentication problems
+
+<AccordionGroup>
+  <Accordion title="I can't log in">
+    Start with the basics before assuming a deeper problem:
+
+    1. Double-check that you're entering the correct email address for your account.
+    2. Re-enter your password carefully — check that **Caps Lock** is off, as passwords are case-sensitive.
+    3. If you've forgotten your password, click **Forgot password** on the login page and follow the reset instructions. Reset links expire after 60 minutes.
+    4. If none of the above works, ask your admin to verify that your account is active in **Settings → Manage Roles**.
+  </Accordion>
+
+  <Accordion title="I keep getting logged out">
+    The portal uses session tokens that expire after a period of inactivity. When your session expires, you are automatically signed out for security. Simply sign in again to resume your work.
+
+    If you are being logged out unexpectedly during an active session, try clearing your browser cookies and signing back in. If the problem persists, report it to your admin.
+  </Accordion>
+
+  <Accordion title="I get a 403 error on API calls">
+    A `403 Forbidden` error means the portal's API rejected your request because your account does not have permission to perform that action or access that resource.
+
+    Ask your admin to review your role and permission settings in **Settings → Manage Roles**. Once the correct permissions are granted, try the action again.
+
+    <Warning>
+      Do not attempt to work around 403 errors by modifying request headers or tokens. Access controls exist to protect your organisation's data.
+    </Warning>
+  </Accordion>
+</AccordionGroup>
+
+## Chat problems
+
+<AccordionGroup>
+  <Accordion title="Messages aren't appearing in real time">
+    The portal uses a real-time messaging service for live message delivery. If messages are delayed or not appearing at all:
+
+    1. Check your internet connection — a dropped connection will interrupt the real-time feed.
+    2. Refresh the page. The chat will reconnect and load any messages you missed.
+    3. If you are on a corporate or managed network, ask your IT team to confirm that the portal's real-time messaging service is not blocked by a firewall or web proxy.
+  </Accordion>
+
+  <Accordion title="I can't start a chat with a handyman">
+    Partner ↔ Handyman chats are only available when both parties share a connected installation or job. If you do not have a shared assignment, the chat option will not appear.
+
+    Contact your admin to verify the connection or to create the appropriate installation assignment before attempting to chat.
+  </Accordion>
+
+  <Accordion title="I see duplicate messages">
+    Duplicate messages can appear on slow or unstable connections when a message is retried before the first delivery is confirmed. This is a known edge case.
+
+    Refresh the page to clear the duplicates. The server stores only one copy of each message, so the conversation history will be correct after a refresh.
+  </Accordion>
+</AccordionGroup>
+
+## Installations
+
+<AccordionGroup>
+  <Accordion title="I can't find an installation">
+    If an installation doesn't appear in your list:
+
+    1. Use the **search bar** at the top of the Installations page and search by customer name, address, or installation ID.
+    2. Check the status filter — set it to **All Status** to make sure you're not filtering out the installation you're looking for.
+    3. The installation may have been assigned to a different partner. Ask your admin to search across all partners and reassign if needed.
+  </Accordion>
+
+  <Accordion title="The status won't change">
+    If you cannot update an installation's status:
+
+    1. Confirm that your account has the **Installations** permission. Without it, status fields are read-only.
+    2. Check that the installation is in a state that allows a transition — some statuses can only be set from specific preceding statuses.
+    3. If you have the permission and the transition should be valid, contact your admin. They can update the status directly or investigate any underlying data issues.
+  </Accordion>
+</AccordionGroup>
+
+## Leads
+
+<AccordionGroup>
+  <Accordion title="The Generate Token button is greyed out">
+    The **Generate Token** button is only active when a lead meets both of the following conditions:
+
+    - The lead has a valid ID assigned by the system.
+    - The lead is in an eligible status (for example, **Qualified**).
+
+    If the button is still greyed out after confirming both conditions, refresh the page and try again. If the problem continues, contact your admin.
+  </Accordion>
+
+  <Accordion title="A converted lead still shows as Qualified">
+    Status changes sometimes take a moment to propagate across the portal. Refresh the page — the updated status should appear after a reload.
+
+    If the lead still shows the wrong status after refreshing, ask your admin to check the lead record directly and correct the status manually if needed.
+  </Accordion>
+</AccordionGroup>
+
+## General
+
+<AccordionGroup>
+  <Accordion title="A menu item is missing">
+    If you cannot see a section of the portal that you expect to access, your account has not been granted the permission for that menu item. Menu-level access is controlled per user in **Settings → Create User** (set at account creation) or by recreating the account with the correct permissions.
+
+    Contact your admin and ask them to enable the relevant permission for your account.
+  </Accordion>
+
+  <Accordion title="The page is loading slowly">
+    Try the following steps in order:
+
+    1. **Clear your browser cache** — outdated cached assets can slow down page loads. Clear the cache and reload.
+    2. **Try a different browser** — if the page loads faster in another browser, the issue may be browser-specific.
+    3. **Check your internet connection** — run a speed test to rule out a network issue on your end.
+
+    <Tip>
+      Chrome and Edge tend to perform best with the portal. If you're using an older browser, consider upgrading to the latest version.
+    </Tip>
+
+    If the portal is consistently slow across browsers and connections, the issue may be on the server side. Report it to your admin so they can check the platform status.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  If your issue isn't listed here, contact your Heyzack account manager for further assistance.
+</Note>

@@ -1,0 +1,45 @@
+---
+title: "Authenticate API requests with Bearer tokens"
+description: "Learn how to obtain your Bearer token after signing in to the Heyzack Partner Portal and how to pass it correctly in every API request."
+---
+
+Every Heyzack Partner Portal API endpoint requires authentication. The API uses Bearer tokens: you obtain a token by signing in to the portal, then include it in every request you make.
+
+## Getting your token
+
+Sign in to the Heyzack Partner Portal. On successful login, the portal issues a Bearer token tied to your account and role (partner, handyman, or admin). Your role determines which data you can access and which actions you can perform.
+
+## Passing the token
+
+Include your token in the `Authorization` header of every API request:
+
+```
+Authorization: Bearer <your-token>
+```
+
+### Example request with curl
+
+```bash
+curl -X GET "https://<your-portal-domain>/api/v1/chat/connections" \
+  -H "Authorization: Bearer <your-token>" \
+  -H "Content-Type: application/json"
+```
+
+## Token expiry
+
+Tokens expire after a period of inactivity. If you receive a `401 Unauthorized` response, your token has expired. Sign in to the portal again to get a fresh token, then retry your request.
+
+<Warning>
+Never share your token or commit it to source control. Treat it like a password.
+</Warning>
+
+## Error responses
+
+| Scenario | Response |
+|----------|----------|
+| No token or malformed token | `401 Unauthorized` |
+| Valid token, insufficient permissions | `403 Forbidden` |
+
+```json
+{ "error": "Unauthorized" }
+```

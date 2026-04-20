@@ -1,0 +1,73 @@
+---
+title: "Real-time chat with partners and handymen"
+description: "Send and receive real-time messages with partners, handymen, and admins in the Heyzack portal — with support for text and image attachments."
+---
+
+The Chat section lets portal users communicate in real time without leaving the dashboard. Partners can reach out to their connected handymen or contact the Heyzack admin team directly. Handymen can do the same. Admins can message any partner or handyman at any time. Messages appear instantly and are preserved in a scrollable conversation history.
+
+## Who can chat with whom
+
+Three conversation types are supported:
+
+<CardGroup cols={3}>
+  <Card title="Partner ↔ Handyman" icon="wrench">
+    Partners and handymen can message each other when they share a connected installation or job.
+  </Card>
+  <Card title="Partner ↔ Admin" icon="building-2">
+    Partners can contact the Heyzack admin team at any time. Admins can also initiate conversations with any partner.
+  </Card>
+  <Card title="Handyman ↔ Admin" icon="user">
+    Handymen can reach the admin team directly, and admins can message any handyman without a connection requirement.
+  </Card>
+</CardGroup>
+
+<Note>
+  Partner ↔ Handyman chats require a shared job or installation connection. If no connection exists, the conversation cannot be started.
+</Note>
+
+## Starting a conversation
+
+<Steps>
+  <Step title="Open Chat">
+    Navigate to **Chat** in the sidebar. You will see a list of all your available contacts.
+  </Step>
+  <Step title="Search for a contact">
+    Use the search bar to filter by name, email, or phone number.
+  </Step>
+  <Step title="Select a contact">
+    Click any contact to open the conversation thread.
+  </Step>
+</Steps>
+
+## Welcome message
+
+When a partner or handyman opens a chat with the admin team for the first time, they will see an automatic welcome message as the first item in the conversation:
+
+> "Welcome to Heyzack! How can we help you today?"
+
+This message comes from the admin account and only appears in partner-to-admin and handyman-to-admin conversations. It does not appear in partner-to-handyman chats or in conversations that admins initiate.
+
+## Sending messages
+
+Type your message in the input field at the bottom of the conversation and press **Enter** or click the **Send** button. The chat supports plain text only. You can also press **Enter** to send without reaching for the mouse.
+
+## Sending images
+
+Click the **paperclip** icon to attach an image. The portal accepts the following formats:
+
+- JPEG
+- PNG
+- WebP
+- GIF
+
+A preview of the selected image appears above the input field before you send. Click **Cancel** to remove it if you chose the wrong file.
+
+## Chat history
+
+Each conversation loads up to 50 messages per page, displayed in chronological order (oldest first). Scroll up to load earlier messages. The portal scrolls to the most recent message automatically when the conversation opens or when a new message arrives.
+
+## Real-time delivery
+
+Messages are delivered instantly. There is no need to refresh the page — incoming messages appear as soon as they are sent by the other party.
+
+For the API reference, see [Send a message](/api/chat/send-message).

@@ -1,91 +1,61 @@
 ---
-title: Welcome to Unmint
-description: A free, open-source Mintlify-style documentation system
+title: "Heyzack Partner Portal: Smart Home Installation CRM"
+description: "The Heyzack Partner Portal helps you manage smart home installations, partners, handymen, leads, payments, and your team from one dashboard."
 ---
 
-Welcome to **Unmint** — a beautiful, customizable documentation system built with [Next.js](https://nextjs.org), [Fumadocs](https://fumadocs.vercel.app), and more (see [Built With](#built-with) below).
+The Heyzack Partner Portal is your central hub for managing every aspect of your smart home installation business. From tracking leads and scheduling installations to paying partners and chatting with your team in real time, everything you need is in one place.
 
 <CardGroup cols={2}>
-  <Card title="Quick Start" icon="rocket" href="/docs/quickstart">
-    Get up and running with Unmint in under 5 minutes.
+  <Card title="Quick Start" icon="rocket" href="/quickstart">
+    Get up and running in minutes. Create your first installation and invite your team.
   </Card>
-  <Card title="Components" icon="code" href="/docs/components">
-    Explore all the MDX components available out of the box.
+  <Card title="Authentication" icon="key" href="/authentication">
+    Learn how to sign in and pass your bearer token in API requests.
   </Card>
-  <Card title="Theming" icon="gear" href="/docs/theming">
-    Customize colors, fonts, and branding to match your project.
+  <Card title="Installation Lifecycle" icon="house" href="/concepts/installation-lifecycle">
+    Understand how installations move from draft to customer-approved.
   </Card>
-  <Card title="Deployment" icon="rocket" href="/docs/deployment">
-    Deploy your docs to Vercel, Netlify, or any static host.
+  <Card title="API Reference" icon="code" href="/api/overview">
+    Explore the REST API endpoints available to your team and integrations.
   </Card>
 </CardGroup>
 
-## What is Unmint?
+## Get started in four steps
 
-Unmint is a **free and open-source** alternative to paid documentation platforms like Mintlify. It provides:
+<Steps>
+  <Step title="Sign in to the portal">
+    Navigate to the portal URL and log in with your email and password. If you don't have an account, ask your admin to create one in **Settings → Create User**.
+  </Step>
+  <Step title="Explore the dashboard">
+    The dashboard gives you an at-a-glance view of total sales, active installations, new leads, and active partners. Use it as your daily command center.
+  </Step>
+  <Step title="Create your first installation">
+    Go to **Installations** and click **New Installation**. Assign it to a partner and handyman, set a scheduled date, and track it through to completion.
+  </Step>
+  <Step title="Invite your team">
+    Head to **Settings** to create user accounts for your managers and support staff, assign roles, and configure which sections each person can access.
+  </Step>
+</Steps>
 
-- **Beautiful out-of-the-box styling** that looks professional without customization
-- **Full MDX support** with pre-built components (cards, callouts, tabs, steps, etc.)
-- **Built-in search** powered by Fumadocs
-- **Dynamic OG images** generated automatically for social sharing
-- **Dark mode** with seamless theme switching
-- **Easy customization** through a simple theme configuration file
-
-<Tip>
-Unmint is designed to be forked and customized. All the code is yours to modify.
-</Tip>
-
-## Why Unmint?
-
-| Feature | Unmint | Typical SaaS |
-|---------|--------|--------------|
-| Cost | Free | $50-500/mo |
-| Customization | Full control | Limited |
-| Data ownership | 100% yours | Hosted |
-| Self-hosted | Yes | No |
-| Open source | Yes | No |
-
-## Getting Started
-
-```bash
-# Clone the repository
-git clone https://github.com/gregce/unmint.git my-docs
-
-# Install dependencies
-cd my-docs
-npm install
-
-# Start development server
-npm run dev
-```
-
-Then open [http://localhost:3000](http://localhost:3000) to see your docs.
-
-## Built With
-
-Unmint is built on top of excellent open-source projects:
+## What you can do
 
 <CardGroup cols={2}>
-  <Card title="Fumadocs" href="https://fumadocs.vercel.app">
-    The documentation framework powering search, MDX processing, and content management.
+  <Card title="Manage Installations" icon="wrench" href="/features/installations">
+    Track every smart home installation through its full lifecycle with status updates, notes, and handyman assignments.
   </Card>
-  <Card title="Next.js" href="https://nextjs.org">
-    The React framework for production-grade web applications.
+  <Card title="Track Leads" icon="user-plus" href="/features/leads">
+    Capture and qualify leads from partners using referral tokens. Convert them to customers and orders.
   </Card>
-  <Card title="Tailwind CSS" href="https://tailwindcss.com">
-    A utility-first CSS framework for rapid UI development.
+  <Card title="Partner Payouts" icon="money-bill" href="/features/payments">
+    Calculate and process commission payouts to your partner network with full audit history.
   </Card>
-  <Card title="Shiki" href="https://shiki.style">
-    Beautiful syntax highlighting powered by the same engine as VS Code.
+  <Card title="Team Chat" icon="message" href="/features/chat">
+    Communicate with partners and handymen in real time. Every conversation is archived and searchable.
   </Card>
-  <Card title="next-themes" href="https://github.com/pacocoursey/next-themes">
-    Perfect dark mode with zero flash and system preference detection.
+  <Card title="Sales Reporting" icon="chart-bar" href="/features/orders">
+    Analyze revenue trends, order volumes, and partner performance with date-range filters.
   </Card>
-  <Card title="React" href="https://react.dev">
-    The library for building user interfaces.
+  <Card title="Roles & Permissions" icon="shield" href="/concepts/roles-permissions">
+    Control exactly what each team member can see and do with granular menu-level permissions.
   </Card>
 </CardGroup>
-
-<Note>
-Unmint is fully open source under the MIT license. Feel free to use it for personal or commercial projects.
-</Note>

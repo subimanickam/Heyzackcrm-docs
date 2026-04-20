@@ -1,0 +1,273 @@
+---
+title: "GET /api/v1/chat/connections — list contacts"
+description: "Retrieve all users available to chat with in the Heyzack Partner Portal. Response shape adapts to your role — partner, handyman, or admin."
+---
+
+Use this endpoint to get the list of users available to chat with. You do not need to pass any query parameters—the API reads your authenticated role from your Bearer token and returns the appropriate set of contacts. Partners receive their connected handymen plus the admin. Handymen receive their connected partners plus the admin. Admins receive all partners and handymen on the platform.
+
+## Endpoint
+
+```
+GET /api/v1/chat/connections
+```
+
+## Authentication
+
+Bearer token required. See [Authentication](/api/authentication).
+
+## Query parameters
+
+None required. The endpoint derives your identity and role from your token.
+
+## Example
+
+```bash
+curl "https://<your-portal-domain>/api/v1/chat/connections" \
+  -H "Authorization: Bearer <your-token>"
+```
+
+## Response by role
+
+The shape of the `connections` array varies slightly by role. Partner and admin contacts include `availability_status` and `rating` fields on handyman entries.
+
+<Tabs>
+  <Tab title="Handyman">
+    A handyman receives all partners they are connected to, plus the admin account.
+
+    <ResponseField name="connections" type="object[]">
+      List of contacts available to this handyman.
+
+      <Expandable title="connection properties">
+        <ResponseField name="id" type="string">
+          Unique ID of the contact (partner or admin).
+        </ResponseField>
+
+        <ResponseField name="name" type="string">
+          Display name of the contact.
+        </ResponseField>
+
+        <ResponseField name="email" type="string">
+          Email address of the contact.
+        </ResponseField>
+
+        <ResponseField name="image" type="string">
+          Profile image URL, or `null` if not set.
+        </ResponseField>
+
+        <ResponseField name="phone" type="string">
+          Phone number, or `null` if not available.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="role" type="string">
+      Always `"handyman"` for this role.
+    </ResponseField>
+
+    ```json
+    {
+      "data": {
+        "connections": [
+          {
+            "id": "partner_abc123",
+            "name": "John Doe",
+            "email": "john@example.com",
+            "image": "https://example.com/image.jpg",
+            "phone": "+1234567890"
+          },
+          {
+            "id": "partner_def456",
+            "name": "Jane Smith",
+            "email": "jane@example.com",
+            "image": null,
+            "phone": "+0987654321"
+          },
+          {
+            "id": "admin_xyz789",
+            "name": "Heyzack Admin",
+            "email": "admin@heyzack.ai",
+            "image": null,
+            "phone": null
+          }
+        ],
+        "role": "handyman"
+      }
+    }
+    ```
+  </Tab>
+
+  <Tab title="Partner">
+    A partner receives all handymen connected to their account, plus the admin account. Handyman entries include `availability_status` and `rating`.
+
+    <ResponseField name="connections" type="object[]">
+      List of contacts available to this partner.
+
+      <Expandable title="connection properties">
+        <ResponseField name="id" type="string">
+          Unique ID of the contact (handyman or admin).
+        </ResponseField>
+
+        <ResponseField name="name" type="string">
+          Display name of the contact.
+        </ResponseField>
+
+        <ResponseField name="email" type="string">
+          Email address of the contact.
+        </ResponseField>
+
+        <ResponseField name="image" type="string">
+          Profile image URL, or `null` if not set.
+        </ResponseField>
+
+        <ResponseField name="phone" type="string">
+          Phone number, or `null` if not available.
+        </ResponseField>
+
+        <ResponseField name="availability_status" type="string">
+          Availability status of the handyman, e.g. `"Available"` or `"Busy"`. Not present on the admin entry.
+        </ResponseField>
+
+        <ResponseField name="rating" type="string">
+          Average rating of the handyman as a string, e.g. `"4.8"`. Not present on the admin entry.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="role" type="string">
+      Always `"partner"` for this role.
+    </ResponseField>
+
+    ```json
+    {
+      "data": {
+        "connections": [
+          {
+            "id": "handyman_xyz456",
+            "name": "Mike Johnson",
+            "email": "mike@example.com",
+            "image": "https://example.com/image.jpg",
+            "phone": "+1122334455",
+            "availability_status": "Available",
+            "rating": "4.8"
+          },
+          {
+            "id": "handyman_abc789",
+            "name": "Sarah Williams",
+            "email": "sarah@example.com",
+            "image": null,
+            "phone": "+5566778899",
+            "availability_status": "Busy",
+            "rating": "4.9"
+          },
+          {
+            "id": "admin_xyz789",
+            "name": "Heyzack Admin",
+            "email": "admin@heyzack.ai",
+            "image": null,
+            "phone": null
+          }
+        ],
+        "role": "partner"
+      }
+    }
+    ```
+  </Tab>
+
+  <Tab title="Admin">
+    An admin receives all partners and all handymen on the platform. Handyman entries include `availability_status` and `rating`.
+
+    <ResponseField name="connections" type="object[]">
+      List of all partners and handymen.
+
+      <Expandable title="connection properties">
+        <ResponseField name="id" type="string">
+          Unique ID of the contact (partner or handyman).
+        </ResponseField>
+
+        <ResponseField name="name" type="string">
+          Display name of the contact.
+        </ResponseField>
+
+        <ResponseField name="email" type="string">
+          Email address of the contact.
+        </ResponseField>
+
+        <ResponseField name="image" type="string">
+          Profile image URL, or `null` if not set.
+        </ResponseField>
+
+        <ResponseField name="phone" type="string">
+          Phone number, or `null` if not available.
+        </ResponseField>
+
+        <ResponseField name="availability_status" type="string">
+          Availability status — present on handyman entries only, e.g. `"Available"` or `"Busy"`.
+        </ResponseField>
+
+        <ResponseField name="rating" type="string">
+          Average rating as a string — present on handyman entries only, e.g. `"4.8"`.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="role" type="string">
+      Always `"admin"` for this role.
+    </ResponseField>
+
+    ```json
+    {
+      "data": {
+        "connections": [
+          {
+            "id": "partner_abc123",
+            "name": "John Doe",
+            "email": "john@example.com",
+            "image": "https://example.com/image.jpg",
+            "phone": "+1234567890"
+          },
+          {
+            "id": "partner_def456",
+            "name": "Jane Smith",
+            "email": "jane@example.com",
+            "image": null,
+            "phone": "+0987654321"
+          },
+          {
+            "id": "handyman_xyz456",
+            "name": "Mike Johnson",
+            "email": "mike@example.com",
+            "image": "https://example.com/image.jpg",
+            "phone": "+1122334455",
+            "availability_status": "Available",
+            "rating": "4.8"
+          },
+          {
+            "id": "handyman_abc789",
+            "name": "Sarah Williams",
+            "email": "sarah@example.com",
+            "image": null,
+            "phone": "+5566778899",
+            "availability_status": "Busy",
+            "rating": "4.9"
+          }
+        ],
+        "role": "admin"
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Room ID format
+
+When you open a conversation with a contact, the chat room ID is generated deterministically from the participant IDs. You will see this `roomId` returned in message and history responses.
+
+| Conversation type | Room ID format | Example |
+|-------------------|---------------|---------|
+| Partner ↔ Handyman | `room_{sorted_id1}_{sorted_id2}` | `room_partner_abc123_handyman_xyz456` |
+| Admin ↔ Partner | `room_admin_{partnerId}` | `room_admin_partner_abc123` |
+| Admin ↔ Handyman | `room_admin_{handymanId}` | `room_admin_handyman_xyz456` |
+
+<Note>
+  For partner–handyman rooms, the two IDs are sorted alphabetically before being joined. This ensures both participants always refer to the same room regardless of which side initiates the conversation.
+</Note>

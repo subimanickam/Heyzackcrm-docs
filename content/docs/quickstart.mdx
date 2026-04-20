@@ -1,110 +1,64 @@
 ---
-title: Quick Start
-description: Get your documentation site up and running in under 5 minutes
+title: "Get started with the Heyzack Partner Portal"
+description: "Sign in, explore the dashboard, create your first installation, add a lead, and set up your team — everything you need to hit the ground running."
 ---
 
-This guide will help you set up Unmint and create your first documentation page.
-
-## Prerequisites
-
-Before you begin, make sure you have:
-
-- **Node.js 18+** installed
-- **npm** or **pnpm** package manager
-- A code editor (VS Code recommended)
-
-## Installation
+This guide walks you through the essential steps to get your team up and running on the Heyzack Partner Portal. By the end, you'll have signed in, created your first installation, added a lead, and set up at least one team member — giving you a working foundation for your day-to-day operations.
 
 <Steps>
-  <Step title="Clone the repository">
-    Start by cloning the Unmint template:
+  <Step title="Sign in">
+    Navigate to the portal login page. Enter your email address and password, then click **Sign in**.
 
-    ```bash
-    git clone https://github.com/gregce/unmint.git my-docs
-    cd my-docs
-    ```
+    <Tip>
+      If you don't have credentials yet, ask your admin to create an account for you in **Settings → Create User**.
+    </Tip>
+
+    If you've forgotten your password, click **Forgot password** on the login page to request a reset link by email.
   </Step>
 
-  <Step title="Install dependencies">
-    Install the required npm packages:
+  <Step title="Explore the dashboard">
+    After signing in, you land on the dashboard. This is your at-a-glance overview of the business. It displays four key stats:
 
-    ```bash
-    npm install
-    ```
+    - **Total sales** — cumulative revenue across all orders
+    - **New leads** — leads created within the current period
+    - **Active installations** — installations currently in progress
+    - **Active partners** — partners with recent referral activity
+
+    Use the dashboard as your daily starting point before diving into specific sections.
   </Step>
 
-  <Step title="Start the development server">
-    Launch the local development server:
+  <Step title="Create your first installation">
+    Go to **Installations** in the sidebar and click **New Installation**. Fill in the following details:
 
-    ```bash
-    npm run dev
-    ```
+    - **Title** — a descriptive name for the job (for example, "Smith Residence — Smart Lock + Thermostat")
+    - **Partner** — the partner account associated with this installation
+    - **Handyman** — the technician who will complete the work on site
+    - **Scheduled date** — the date the installation is planned to take place
 
-    Open [http://localhost:3000](http://localhost:3000) in your browser.
+    Click **Save** to create the installation. You can update its status and add notes as the job progresses.
   </Step>
 
-  <Step title="Create your first page">
-    Add a new MDX file in `content/docs/`:
+  <Step title="Add a lead">
+    Go to **Leads** in the sidebar and click **Create Lead**. Fill in the customer's details, including their name, contact information, and any notes about their interest or requirements.
 
-    ```mdx
-    ---
-    title: My First Page
-    description: A description of my page
-    ---
+    <Info>
+      Leads can also be created by partners using their unique referral token. You can track the source of each lead from the leads list view.
+    </Info>
 
-    # Hello World
+    Once created, you can qualify the lead, link it to a partner, and eventually convert it to an order.
+  </Step>
 
-    This is my first documentation page!
-    ```
+  <Step title="Set up your team">
+    Go to **Settings** and click **Create User**. Enter the new team member's name and email address, then assign them a role — such as Manager, Support, Partner, or Handyman.
+
+    The role you choose determines which sections of the portal the user can access. You can adjust these permissions at any time from the user's profile in **Settings**.
+
+    <Warning>
+      Only admins can create users and modify role permissions. If you don't see the **Settings** option, contact your admin.
+    </Warning>
   </Step>
 </Steps>
 
-## Project Structure
-
-Here's an overview of the key directories:
-
-```
-my-docs/
-├── app/                    # Next.js app directory
-│   ├── docs/              # Documentation routes
-│   └── components/        # UI components
-├── content/
-│   └── docs/              # Your MDX documentation files
-│       ├── index.mdx      # Homepage
-│       └── meta.json      # Navigation structure
-├── lib/
-│   └── theme-config.ts    # Customize your theme here
-└── public/                # Static assets
-```
-
-## Adding Navigation
-
-Edit `content/docs/meta.json` to configure your sidebar navigation:
-
-```json
-{
-  "title": "Documentation",
-  "pages": [
-    "index",
-    "quickstart",
-    "---Getting Started---",
-    "installation",
-    "configuration"
-  ]
-}
-```
-
-<Info>
-Use `"---Section Name---"` to create section separators in your sidebar.
-</Info>
-
-## Next Steps
-
-<CardGroup cols={2}>
-  <Card title="Learn Components" icon="code" href="/docs/components">
-    Explore all available MDX components
-  </Card>
-  <Card title="Customize Theme" icon="gear" href="/docs/theming">
-    Match your brand colors and styling
-  </Card>
-</CardGroup>
+<Note>
+  The portal is available in English and French. To switch languages, use the language dropdown in the sidebar. Your preference is saved automatically.
+</Note>

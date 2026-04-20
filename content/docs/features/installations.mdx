@@ -1,0 +1,90 @@
+---
+title: "Manage smart home installations end-to-end"
+description: "Search, filter, create, and track every smart home installation from initial scheduling through to customer approval using the Heyzack Partner Portal."
+---
+
+The Installations page is the central hub for tracking every smart home installation your team manages. From here you can monitor progress across all open jobs, find a specific installation by customer or phone number, drill into full details, assign a handyman, move an installation through its lifecycle, and add internal notes — all without leaving the portal.
+
+## Browsing installations
+
+A search bar and status filter sit at the top of the page.
+
+- **Search** — type any part of the installation title, the customer's name, or a phone number. Results update as you type.
+- **Status filter** — narrow the list to installations in a particular stage:
+
+| Filter value | What it shows |
+|---|---|
+| All Status | Every installation regardless of stage |
+| Draft | Created but not yet scheduled |
+| Scheduled | Date and time confirmed, awaiting assignment |
+| Assigned | A handyman has been assigned |
+| In Progress | Work has started on-site |
+| Completed | Work finished, pending customer sign-off |
+| Customer Approved | Customer has confirmed the installation |
+| Cancelled | Installation was cancelled |
+
+## Installation table columns
+
+The main table shows one row per installation with the following columns:
+
+| Column | Description |
+|---|---|
+| ID | Unique installation identifier (monospace, for reference) |
+| Title | Descriptive name of the installation job |
+| Customer | Name of the end customer |
+| Partner | The partner company responsible for the job |
+| Handyman | The technician assigned to carry out the work |
+| Scheduled | The confirmed date for the on-site visit |
+| Status | Colour-coded badge reflecting the current lifecycle stage |
+
+<Note>
+  Status badges use consistent colour coding throughout the portal: grey for Draft, blue for Scheduled and Assigned, amber for In Progress, green for Completed and Customer Approved, and red for Cancelled. The same colours appear on the dashboard's Recent Installations card.
+</Note>
+
+## Viewing an installation
+
+Click any row in the table to open the installation detail view. The detail view is split into two panels:
+
+- **Left sidebar** — quick info (scheduled date, created date, status), customer information (name, email, phone, address), partner information (name, code, tier, contact details), handyman information, completion photos, contract information, and customer rating.
+- **Main panel** — four tabs for deeper information:
+
+<Accordion title="Overview tab">
+  Shows the full installation record: title, ID, description, scheduled date, completed date, linked order ID, customer smart-home account email, and timestamps for creation and last update.
+</Accordion>
+
+<Accordion title="Products tab">
+  Lists every product included in the installation, with product name, SKU, quantity, and price per item.
+</Accordion>
+
+<Accordion title="Activity tab">
+  Displays a chronological timeline of every event on the installation — status changes, assignments, and other logged actions — with the timestamp and the name of the user who triggered each event.
+</Accordion>
+
+<Accordion title="Notes tab">
+  Lets you add and view internal notes. Type up to 5,000 characters and click **Add Note** to save. Each note shows the author name, email, and creation timestamp. Notes can be deleted using the trash icon; a confirmation dialog prevents accidental deletions.
+</Accordion>
+
+## Creating an installation
+
+New installations are created from within the portal using the standard creation flow. When you create an installation you provide:
+
+- A descriptive title for the job
+- The customer to link it to
+- The partner responsible
+- A scheduled date and time
+
+The installation starts in **Draft** status and moves through the lifecycle as work progresses.
+
+## Updating status
+
+You advance an installation through its lifecycle from the detail view. Use the status controls in the left sidebar or the overview panel to select the next appropriate stage. Each status change is recorded automatically in the Activity timeline so there is a full audit trail.
+
+See [Installation lifecycle](/concepts/installation-lifecycle) for the complete description of every stage and the allowed transitions between them.
+
+## Assigning a handyman
+
+Handyman assignment happens inside the installation detail view. Open the installation you want to assign, then use the Handyman Information section in the left sidebar. Once a handyman is linked, their name, email, and phone number appear in the sidebar and in the main installations table.
+
+<Note>
+  An installation must be in at least **Scheduled** status before a handyman assignment makes operational sense. Assigning a handyman will typically advance the status to **Assigned**.
+</Note>

@@ -1,0 +1,139 @@
+---
+title: "POST /api/v1/chat/send — send a chat message"
+description: "Send a text message to a partner, handyman, or admin using the Heyzack Chat API. Exactly one recipient ID must be provided per request."
+---
+
+Use this endpoint to send a text message from your authenticated account to another user in the Heyzack network. The recipient is identified by exactly one of `handymanId`, `partnerId`, or `adminId`, depending on the direction of the conversation. Partner–handyman messaging requires that the two users are connected through a job or installation.
+
+## Endpoint
+
+```
+POST /api/v1/chat/send
+```
+
+## Authentication
+
+Bearer token required. See [Authentication](/api/authentication).
+
+## Request body
+
+<ParamField body="message" type="string" required>
+  The text content of the message to send.
+</ParamField>
+
+<ParamField body="handymanId" type="string">
+  ID of the handyman recipient. Provide this when a partner or admin is sending to a handyman.
+</ParamField>
+
+<ParamField body="partnerId" type="string">
+  ID of the partner recipient. Provide this when a handyman or admin is sending to a partner.
+</ParamField>
+
+<ParamField body="adminId" type="string">
+  ID of the admin recipient. Provide this when a partner or handyman is sending to an admin.
+</ParamField>
+
+<Note>
+  Exactly one of `handymanId`, `partnerId`, or `adminId` must be included in every request. Providing more than one or none of these fields returns a `400` error.
+</Note>
+
+## Examples
+
+<CodeGroup>
+
+```json Partner → Handyman
+{
+  "handymanId": "handyman_xyz456",
+  "message": "Hello! I have a question about the installation tomorrow."
+}
+```
+
+```json Handyman → Partner
+{
+  "partnerId": "partner_abc123",
+  "message": "I'll be there at 10 AM."
+}
+```
+
+```json Partner → Admin
+{
+  "adminId": "admin_xyz789",
+  "message": "I need help with my account settings."
+}
+```
+
+```json Handyman → Admin
+{
+  "adminId": "admin_xyz789",
+  "message": "I have a question about payment."
+}
+```
+
+```json Admin → Partner
+{
+  "partnerId": "partner_abc123",
+  "message": "Thank you for reaching out. How can I assist you?"
+}
+```
+
+```json Admin → Handyman
+{
+  "handymanId": "handyman_xyz456",
+  "message": "Your payment has been processed."
+}
+```
+
+</CodeGroup>
+
+## Success response
+
+Returns `200 OK` with the created message object nested under `data`.
+
+<ResponseField name="id" type="string">
+  Unique identifier for the message.
+</ResponseField>
+
+<ResponseField name="roomId" type="string">
+  The chat room this message belongs to. Room IDs are deterministic based on the participants.
+</ResponseField>
+
+<ResponseField name="senderId" type="string">
+  ID of the user who sent the message (your authenticated user).
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  The text content that was sent.
+</ResponseField>
+
+<ResponseField name="messageType" type="string">
+  Always `"text"` for this endpoint.
+</ResponseField>
+
+<ResponseField name="createdAt" type="string">
+  ISO 8601 timestamp of when the message was created.
+</ResponseField>
+
+```json
+{
+  "message": "Message sent successfully",
+  "data": {
+    "id": "msg_123456",
+    "roomId": "room_admin_partner_abc123",
+    "senderId": "user_abc123",
+    "message": "I need help with my account settings.",
+    "messageType": "text",
+    "createdAt": "2024-01-16T10:30:00.000Z"
+  }
+}
+```
+
+## Error responses
+
+| Status | Error message | Cause |
+|--------|---------------|-------|
+| 400 | `"partnerId, handymanId, or adminId is required"` | No recipient ID was provided |
+| 400 | `"Admin can only chat with either partner or handyman, not both"` | Admin provided more than one recipient ID |
+| 400 | `"Invalid recipient role"` | The recipient ID does not match a valid role |
+| 403 | `"Handyman and partner are not connected"` | The handyman and partner are not linked through a job or installation |
+| 404 | `"Recipient user not found"` | No user exists with the given ID |
+| 500 | `"Internal server error"` | An unexpected error occurred on the server |
