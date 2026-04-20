@@ -1,20 +1,18 @@
 {
-  "title": "Heyzack Partner Portal",
+  "title": "Getting Started",
   "pages": [
     "index",
     "introduction",
     "quickstart",
     "authentication",
-    "---Core Concepts---",
+    "---Guide---",
     "concepts",
-    "---Features---",
     "features",
-    "---User Management---",
     "user-management",
     "---Help---",
     "faq",
     "troubleshooting",
-    "---API Reference---",
+    "---API---",
     "api"
   ]
 }
