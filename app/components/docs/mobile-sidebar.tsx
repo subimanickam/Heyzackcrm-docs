@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { siteConfig } from '@/lib/theme-config'
+import { DocsSwitcher } from './docs-switcher'
 import type { Root, Node } from 'fumadocs-core/page-tree'
 
 interface MobileSidebarProps {
@@ -143,6 +144,9 @@ export function MobileSidebar({ tree, isOpen, onClose }: MobileSidebarProps) {
 
         {/* Navigation */}
         <nav className="h-[calc(100%-4rem)] overflow-y-auto p-4">
+          <div className="mb-4 sm:hidden">
+            <DocsSwitcher variant="mobile" className="flex w-full justify-center" />
+          </div>
           {/* Quick links */}
           <div className="mb-6 pb-5 border-b border-border">
             <ul className="space-y-1">

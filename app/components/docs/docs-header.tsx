@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { SearchTrigger } from './search-dialog'
 import { ThemeToggle } from './theme-toggle'
 import { MobileSidebar } from './mobile-sidebar'
+import { DocsSwitcher } from './docs-switcher'
 import { siteConfig } from '@/lib/theme-config'
 import type { Root } from 'fumadocs-core/page-tree'
 
@@ -58,8 +59,9 @@ export function DocsHeader({ tree }: DocsHeaderProps) {
               <SearchTrigger />
             </div>
 
-            {/* Right: Links */}
+            {/* Right: Docs switcher + links */}
             <div className="flex items-center gap-1 sm:gap-2">
+              <DocsSwitcher className="hidden sm:flex shrink-0" />
               {siteConfig.links.github && (
                 <a
                   href={siteConfig.links.github}
