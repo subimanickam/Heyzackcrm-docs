@@ -24,7 +24,7 @@ export const siteConfig = {
     github: 'https://github.com/your-org/your-repo',
     discord: 'https://discord.gg/your-invite',
     twitter: 'https://twitter.com/yourhandle',
-    support: 'mailto:support@example.com',
+    support: 'mailto:heyzackai@gmail.com',
   },
 
   // Footer configuration
