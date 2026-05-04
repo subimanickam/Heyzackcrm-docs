@@ -12,9 +12,11 @@ import type { Root } from 'fumadocs-core/page-tree'
 
 interface DocsHeaderProps {
   tree: Root
+  /** Fumadocs search endpoint for this doc set */
+  searchApi?: string
 }
 
-export function DocsHeader({ tree }: DocsHeaderProps) {
+export function DocsHeader({ tree, searchApi = '/api/search' }: DocsHeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const openMobileMenu = useCallback(() => setIsMobileMenuOpen(true), [])
@@ -56,7 +58,7 @@ export function DocsHeader({ tree }: DocsHeaderProps) {
 
             {/* Center: Search */}
             <div className="flex-1 flex justify-center px-2 sm:px-4">
-              <SearchTrigger />
+              <SearchTrigger searchApi={searchApi} />
             </div>
 
             {/* Right: Docs switcher + links */}

@@ -1,7 +1,8 @@
 'use client'
 
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { getDocsSwitcherConfig } from '@/lib/docs-switcher'
 
 interface DocsSwitcherProps {
   className?: string
@@ -9,15 +10,20 @@ interface DocsSwitcherProps {
   variant?: 'header' | 'mobile'
 }
 
+const PARTNER_HREF = '/docs'
+const CRM_HREF = '/docs/crm'
+
 /**
- * Switch between Partner Portal docs and HeyZack CRM docs (separate deployments or local ports).
+ * Switch between Partner and CRM documentation on the same origin
+ * (`/docs` vs `/docs/crm`).
  */
 export function DocsSwitcher({ className, variant = 'header' }: DocsSwitcherProps) {
-  const { siteId, partnerLabel, crmLabel, partnerUrl, crmUrl } = getDocsSwitcherConfig()
-  const isPartner = siteId === 'partner'
+  const pathname = usePathname() || ''
+  const onCrm = pathname === CRM_HREF || pathname.startsWith(`${CRM_HREF}/`)
+  const onPartner = pathname.startsWith(PARTNER_HREF) && !onCrm
 
-  const partnerText = variant === 'mobile' ? 'Partner Portal' : partnerLabel
-  const crmText = variant === 'mobile' ? 'HeyZack CRM' : crmLabel
+  const partnerText = variant === 'mobile' ? 'Partner Portal' : 'Partner'
+  const crmText = variant === 'mobile' ? 'HeyZack CRM' : 'CRM'
 
   const base =
     'flex items-center rounded-md border border-border bg-muted/40 p-0.5 text-xs sm:text-sm'
@@ -30,26 +36,26 @@ export function DocsSwitcher({ className, variant = 'header' }: DocsSwitcherProp
       className={cn(base, className)}
       aria-label="Switch documentation site"
     >
-      {isPartner ? (
+      {onPartner ? (
         <span className={active} title="Partner Portal documentation">
           {partnerText}
         </span>
       ) : (
-        <a href={partnerUrl} className={inactive} title="Open Partner Portal documentation">
+        <Link href={PARTNER_HREF} className={inactive} title="Open Partner Portal documentation">
           {partnerText}
-        </a>
+        </Link>
       )}
       <span className="text-muted-foreground/50 px-0.5 select-none" aria-hidden>
         |
       </span>
-      {!isPartner ? (
+      {onCrm ? (
         <span className={active} title="HeyZack CRM documentation">
           {crmText}
         </span>
       ) : (
-        <a href={crmUrl} className={inactive} title="Open HeyZack CRM documentation">
+        <Link href={CRM_HREF} className={inactive} title="Open HeyZack CRM documentation">
           {crmText}
-        </a>
+        </Link>
       )}
     </nav>
   )

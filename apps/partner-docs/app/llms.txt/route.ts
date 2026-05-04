@@ -1,23 +1,23 @@
-import { source } from '@/lib/docs-source'
+import { partnerSource } from '@/lib/partner-source'
+import { crmSource } from '@/lib/crm-source'
 import { siteConfig, getSiteUrl } from '@/lib/theme-config'
 
 export const dynamic = 'force-static'
 
 export async function GET() {
   const baseUrl = getSiteUrl()
-  const pages = source.getPages()
+  const partnerPages = partnerSource.getPages()
+  const crmPages = crmSource.getPages()
 
-  // Build llms.txt following llmstxt.org format
   let content = `# ${siteConfig.name}
 
 > ${siteConfig.description}
 
-## Documentation
+## Partner Portal documentation
 
 `
 
-  // Add all documentation pages
-  for (const page of pages) {
+  for (const page of partnerPages) {
     const title = page.data.title
     const description = page.data.description || ''
     const url = `${baseUrl}${page.url}`
@@ -29,7 +29,23 @@ export async function GET() {
     }
   }
 
-  // Add links section if configured
+  content += `
+## HeyZack CRM documentation
+
+`
+
+  for (const page of crmPages) {
+    const title = page.data.title
+    const description = page.data.description || ''
+    const url = `${baseUrl}${page.url}`
+
+    if (description) {
+      content += `- [${title}](${url}): ${description}\n`
+    } else {
+      content += `- [${title}](${url})\n`
+    }
+  }
+
   const hasLinks = siteConfig.links.github || siteConfig.links.discord || siteConfig.links.support
   if (hasLinks) {
     content += `

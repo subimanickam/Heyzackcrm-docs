@@ -1,58 +1,41 @@
-import { source } from '@/lib/docs-source'
+import { partnerSource } from '@/lib/partner-source'
+import { crmSource } from '@/lib/crm-source'
 import { siteConfig, getSiteUrl } from '@/lib/theme-config'
 import fs from 'fs'
 import path from 'path'
 
 export const dynamic = 'force-static'
 
-// Strip MDX/JSX components and frontmatter for plain text
 function stripMdxContent(content: string): string {
   return content
-    // Remove frontmatter
     .replace(/^---[\s\S]*?---\n*/m, '')
-    // Remove import statements
     .replace(/^import\s+.*$/gm, '')
-    // Remove JSX components (self-closing and block)
     .replace(/<[A-Z][a-zA-Z]*[^>]*\/>/g, '')
     .replace(/<[A-Z][a-zA-Z]*[^>]*>[\s\S]*?<\/[A-Z][a-zA-Z]*>/g, '')
-    // Remove remaining JSX tags but keep content
     .replace(/<\/?[A-Z][a-zA-Z]*[^>]*>/g, '')
-    // Clean up extra whitespace
     .replace(/\n{3,}/g, '\n\n')
     .trim()
 }
 
-export async function GET() {
-  const baseUrl = getSiteUrl()
-  const pages = source.getPages()
-  const contentDir = path.join(process.cwd(), 'content', 'docs')
-
-  // Build llms-full.txt following llmstxt.org format
-  let content = `# ${siteConfig.name}
-
-> ${siteConfig.description}
-
-This document contains the full content of all documentation pages for AI consumption.
-
----
-
-`
-
-  // Add full content of each documentation page
+function appendPagesMarkdown(
+  content: string,
+  baseUrl: string,
+  contentDir: string,
+  pages: ReturnType<typeof partnerSource.getPages>
+): string {
+  let out = content
   for (const page of pages) {
     const title = page.data.title
     const description = page.data.description || ''
     const url = `${baseUrl}${page.url}`
 
-    content += `## ${title}\n\n`
-    content += `**URL:** ${url}\n`
+    out += `## ${title}\n\n`
+    out += `**URL:** ${url}\n`
     if (description) {
-      content += `**Description:** ${description}\n`
+      out += `**Description:** ${description}\n`
     }
-    content += `\n`
+    out += `\n`
 
-    // Try to read the raw MDX content
-    // Page slugs map to file paths: /docs/foo/bar -> content/docs/foo/bar.mdx
     const slugPath = page.slugs.join('/')
     const mdxPath = slugPath
       ? path.join(contentDir, `${slugPath}.mdx`)
@@ -61,17 +44,43 @@ This document contains the full content of all documentation pages for AI consum
     try {
       if (fs.existsSync(mdxPath)) {
         const rawContent = fs.readFileSync(mdxPath, 'utf-8')
-        const cleanedContent = stripMdxContent(rawContent)
-        content += cleanedContent
+        out += stripMdxContent(rawContent)
       }
     } catch {
       // Skip if file can't be read
     }
 
-    content += `\n\n---\n\n`
+    out += `\n\n---\n\n`
   }
+  return out
+}
 
-  // Add links section if configured
+export async function GET() {
+  const baseUrl = getSiteUrl()
+  const cwd = process.cwd()
+  const partnerDir = path.join(cwd, 'content', 'partner')
+  const crmDir = path.join(cwd, 'content', 'crm')
+
+  let content = `# ${siteConfig.name}
+
+> ${siteConfig.description}
+
+This document contains the full content of all documentation pages for AI consumption.
+
+---
+
+## Partner Portal documentation
+
+`
+
+  content = appendPagesMarkdown(content, baseUrl, partnerDir, partnerSource.getPages())
+
+  content += `## HeyZack CRM documentation
+
+`
+
+  content = appendPagesMarkdown(content, baseUrl, crmDir, crmSource.getPages())
+
   const hasLinks = siteConfig.links.github || siteConfig.links.discord || siteConfig.links.support
   if (hasLinks) {
     content += `## Links

@@ -3,7 +3,9 @@
 ## 2026-05-04
 
 - Docs switcher: each app now fixes its own site identity (`partner` vs `crm`) so the active tab is never a link to localhost because of a wrong or copied `NEXT_PUBLIC_DOCS_SITE`.
-- Monorepo root `npm run dev` now starts Partner and CRM together (`concurrently`); Partner dev script pins port 3000 so switcher defaults match.
+- **Single host:** Partner and CRM docs are both served from `@heyzack/partner-docs` — `/docs` and `/docs/crm` — with two Fumadocs collections (`content/partner`, `content/crm`). Root `npm run dev` / `npm run build` target this app only.
+- CRM doc screenshots live under `apps/partner-docs/public/` (same paths as the former `crm-docs` app).
+
 
 ## 2026-04-20
 

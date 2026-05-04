@@ -1,7 +1,6 @@
 import type { MDXComponents } from 'mdx/types'
 import Link from 'next/link'
 import Image from 'next/image'
-import { cn } from '@/lib/utils'
 
 // Component imports
 import { Card, CardGroup } from './card'
@@ -13,12 +12,23 @@ import { CodeBlock } from './code-block'
 import { Frame } from './frame'
 import { YouTube } from './youtube'
 import { Pre } from './pre'
+import { CodeGroup, Expandable, ParamField, ResponseField } from './api-fields'
 
-function normalizeDocsHref(href?: string): string {
+export type DocsContentBase = '/docs' | '/docs/crm'
+
+function normalizeDocsHref(href: string | undefined, docsBase: DocsContentBase): string {
   if (!href) return ''
-  if (href.startsWith('http') || href.startsWith('#') || href.startsWith('/docs')) return href
-  if (href.startsWith('/')) return `/docs${href}`
-  return href
+  if (href.startsWith('http') || href.startsWith('#')) return href
+  if (href.startsWith(docsBase + '/') || href === docsBase) return href
+  if (docsBase === '/docs/crm') {
+    if (href.startsWith('/docs/crm')) return href
+    if (href.startsWith('/docs/')) {
+      return `/docs/crm${href.slice('/docs'.length)}`
+    }
+  }
+  if (href.startsWith('/docs')) return href
+  if (href.startsWith('/')) return `${docsBase}${href}`
+  return `${docsBase}/${href}`
 }
 
 // Re-export for direct imports
@@ -31,10 +41,12 @@ export { CodeBlock } from './code-block'
 export { Frame } from './frame'
 export { YouTube } from './youtube'
 export { Pre } from './pre'
+export { CodeGroup, Expandable, ParamField, ResponseField } from './api-fields'
 
-export function getMDXComponents(): MDXComponents {
+export function getMDXComponents(docsBase: DocsContentBase = '/docs'): MDXComponents {
+  const norm = (href?: string) => normalizeDocsHref(href, docsBase)
+
   return {
-    // Custom components
     Card,
     CardGroup,
     Info,
@@ -51,8 +63,11 @@ export function getMDXComponents(): MDXComponents {
     CodeBlock,
     Frame,
     YouTube,
+    CodeGroup,
+    Expandable,
+    ParamField,
+    ResponseField,
 
-    // HTML element overrides
     h1: ({ children, id }) => (
       <h1 id={id} className="scroll-m-20 text-4xl font-bold tracking-tight mt-8 mb-4 first:mt-0">
         {children}
@@ -97,7 +112,7 @@ export function getMDXComponents(): MDXComponents {
         )
       }
       return (
-        <Link href={normalizeDocsHref(href)} className="text-[var(--accent)] hover:underline">
+        <Link href={norm(href)} className="text-[var(--accent)] hover:underline">
           {children}
         </Link>
       )
@@ -143,7 +158,6 @@ export function getMDXComponents(): MDXComponents {
     ),
     pre: Pre,
     code: ({ children, className }) => {
-      // Inline code (no className from syntax highlighter)
       if (!className) {
         return (
           <code className="px-1.5 py-0.5 mx-0.5 rounded-md bg-muted border border-border/50 text-sm font-mono text-foreground">
@@ -151,7 +165,6 @@ export function getMDXComponents(): MDXComponents {
           </code>
         )
       }
-      // Code block (has className from syntax highlighter)
       return <code className={className}>{children}</code>
     },
     img: ({ src, alt, ...props }) => (

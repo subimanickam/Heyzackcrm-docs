@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
-export function SearchTrigger() {
+export function SearchTrigger({ searchApi = '/api/search' }: { searchApi?: string }) {
   const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 
@@ -47,7 +47,7 @@ export function SearchTrigger() {
       </button>
 
       {mounted && open && createPortal(
-        <SearchDialog onClose={() => setOpen(false)} />,
+        <SearchDialog searchApi={searchApi} onClose={() => setOpen(false)} />,
         document.body
       )}
     </>
@@ -56,6 +56,7 @@ export function SearchTrigger() {
 
 interface SearchDialogProps {
   onClose: () => void
+  searchApi?: string
 }
 
 // Highlight matching text in a string
@@ -81,9 +82,9 @@ function HighlightedText({ text, query }: { text: string; query: string }) {
   )
 }
 
-function SearchDialog({ onClose }: SearchDialogProps) {
+function SearchDialog({ onClose, searchApi = '/api/search' }: SearchDialogProps) {
   const router = useRouter()
-  const { search, setSearch, query } = useDocsSearch({ type: 'fetch' })
+  const { search, setSearch, query } = useDocsSearch({ type: 'fetch', api: searchApi })
   const [selectedIndex, setSelectedIndex] = useState(0)
   const resultsRef = useRef<HTMLUListElement>(null)
 

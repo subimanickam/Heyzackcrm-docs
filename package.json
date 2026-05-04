@@ -2,26 +2,21 @@
   "name": "heyzack-documents",
   "version": "1.0.0",
   "private": true,
-  "description": "HeyZack documentation monorepo: Partner Portal docs and CRM docs (single codebase)",
+  "description": "HeyZack documentation monorepo: Partner and CRM docs in one Next.js app (single host)",
   "workspaces": [
-    "apps/*"
+    "apps/partner-docs"
   ],
   "scripts": {
-    "dev": "concurrently -n partner,crm -c blue,magenta \"npm run dev:partner\" \"npm run dev:crm\"",
-    "dev:crm": "npm run dev --workspace=@heyzack/crm-docs",
+    "dev": "npm run dev --workspace=@heyzack/partner-docs",
     "dev:partner": "npm run dev --workspace=@heyzack/partner-docs",
-    "build": "npm run build --workspaces --if-present",
-    "build:crm": "npm run build --workspace=@heyzack/crm-docs",
+    "build": "npm run build --workspace=@heyzack/partner-docs",
     "build:partner": "npm run build --workspace=@heyzack/partner-docs",
-    "start:crm": "npm run start --workspace=@heyzack/crm-docs",
+    "start": "npm run start --workspace=@heyzack/partner-docs",
     "start:partner": "npm run start --workspace=@heyzack/partner-docs",
-    "lint": "npm run lint --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present"
+    "lint": "npm run lint --workspace=@heyzack/partner-docs",
+    "test": "npm run test --workspace=@heyzack/partner-docs"
   },
   "engines": {
     "node": ">=18"
-  },
-  "devDependencies": {
-    "concurrently": "^9.1.2"
   }
 }
