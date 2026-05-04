@@ -3,6 +3,7 @@
 ## 2026-05-04
 
 - Docs switcher: each app now fixes its own site identity (`partner` vs `crm`) so the active tab is never a link to localhost because of a wrong or copied `NEXT_PUBLIC_DOCS_SITE`.
+- Monorepo root `npm run dev` now starts Partner and CRM together (`concurrently`); Partner dev script pins port 3000 so switcher defaults match.
 
 ## 2026-04-20
 

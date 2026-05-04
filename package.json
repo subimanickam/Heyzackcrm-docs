@@ -7,7 +7,7 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "npm run dev:crm",
+    "dev": "concurrently -n partner,crm -c blue,magenta \"npm run dev:partner\" \"npm run dev:crm\"",
     "dev:crm": "npm run dev --workspace=@heyzack/crm-docs",
     "dev:partner": "npm run dev --workspace=@heyzack/partner-docs",
     "build": "npm run build --workspaces --if-present",
@@ -20,5 +20,8 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }

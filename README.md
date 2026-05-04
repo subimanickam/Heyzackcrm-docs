@@ -24,14 +24,22 @@ npm install
 
 ## Develop
 
-Run one site at a time (use two terminals for both):
+From the repo root, start **both** sites so the **Partner | CRM** switcher works (Partner on port 3000, CRM on 3001):
+
+```bash
+npm run dev
+```
+
+The switcher uses full URLs (`http://localhost:3000/docs` and `http://localhost:3001/docs` by default). If only one app is running, the other link opens an empty or wrong page.
+
+To run a single app:
 
 ```bash
 npm run dev:partner
 npm run dev:crm
 ```
 
-Each app includes a **Partner | CRM** header switcher. Configure sibling URLs in each app’s `apps/*/ .env.local` (see `apps/crm-docs/.env.example` and `apps/partner-docs/.env.example`).
+For deployed sites, set `NEXT_PUBLIC_PARTNER_DOCS_URL` and `NEXT_PUBLIC_CRM_DOCS_URL` in each app’s `apps/*/.env.local` (see each app’s `.env.example`).
 
 ## Build
 
