@@ -2,10 +2,18 @@ node_modules/
 .next/
 .source/
 
+# Workspace apps
+apps/*/node_modules/
+apps/*/.next/
+apps/*/.source/
+
 # Local environment
 .env
 .env.local
 .env.*.local
+apps/*/.env
+apps/*/.env.local
+apps/*/.env.*.local
 
 # OS/editor
 .DS_Store

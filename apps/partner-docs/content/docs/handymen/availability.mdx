@@ -1,0 +1,87 @@
+---
+title: "Track and view handyman availability schedules"
+description: "View a handyman's daily availability slots, understand status indicators, and see how job assignments affect their availability in real time."
+---
+
+Knowing when each handyman is free helps you assign installations without conflicts. The portal pulls each handyman's schedule automatically so you can see their available time slots at a glance — directly from the handyman table or via their detailed profile.
+
+## Availability status indicators
+
+Every handyman carries one of four availability statuses, visible as a coloured badge in the **Availability** column of the table:
+
+<AccordionGroup>
+  <Accordion title="Available (green)">
+    The handyman has no active jobs and is ready to accept new assignments. When you filter by **Available**, only handymen with this status appear in the list.
+  </Accordion>
+  <Accordion title="Busy (yellow)">
+    The handyman is currently assigned to one or more active jobs. The portal sets this status automatically when a job is assigned to the handyman.
+  </Accordion>
+  <Accordion title="On Leave (red)">
+    The handyman is temporarily unavailable. They will not appear in the suggested list when you are assigning a new installation.
+  </Accordion>
+  <Accordion title="Pending Registration (grey)">
+    The handyman's account setup is not yet complete. Their profile exists in the system but they are not yet active. You can still view their record and contact them through the portal.
+  </Accordion>
+</AccordionGroup>
+
+## View a handyman's daily schedule
+
+Each row in the handyman table includes a **View availability** link directly below the status badge. Clicking it opens the handyman's profile modal with the **Availability** tab pre-selected.
+
+<Steps>
+  <Step title="Locate the handyman in the table">
+    Use the search bar or the status and skill filters to find the handyman whose schedule you want to check.
+  </Step>
+  <Step title="Click View availability">
+    Click the **View availability** link in the **Availability** column of that handyman's row. The details modal opens and lands directly on the Availability tab.
+  </Step>
+  <Step title="Review the day-by-day schedule">
+    The Availability tab shows a rolling list of days. Each day card displays:
+
+    - **Day name and date** — abbreviated day name (e.g., MON) and the calendar date.
+    - **Status badge** — green **Available** or grey **Busy** for that specific day.
+    - **Time slots** — one or more time ranges showing when the handyman is free (e.g., `09:00 - 13:00`). If the handyman is available for the day but no specific slots have been configured, the card shows *No specific slots*.
+    - **Unavailable message** — if the handyman is marked unavailable for a given day, the card shows *Unavailable for this day*.
+  </Step>
+</Steps>
+
+<Note>
+You can also reach the Availability tab by clicking anywhere on a handyman's row to open their full profile, then selecting the **Availability** tab manually.
+</Note>
+
+## How availability affects installation assignment
+
+The portal uses a handyman's current availability status to guide job assignment decisions:
+
+- Only handymen with **Available** status are shown as ideal candidates when you assign a new installation.
+- When you assign a job to a handyman, their availability status changes to **Busy** automatically. Their current location field is also updated to reflect the job address.
+- A handyman returns to **Available** once their jobs are resolved — either completed or cancelled.
+
+<Tip>
+If you need to assign an installation to a handyman who is currently **Busy**, you can still do so by selecting them manually. Check their schedule first to confirm they have capacity during the required time slot.
+</Tip>
+
+<Warning>
+Handymen with **On Leave** status are excluded from the default availability view. If you cannot find a handyman in the list during assignment, check whether their status has been set to On Leave.
+</Warning>
+
+## Understanding time slots
+
+Each available day can have one or more time slots, each defined by a start time and an end time. Time slots represent the windows when the handyman has indicated they can accept work.
+
+<Tabs>
+  <Tab title="Day with slots">
+    The day card shows one or more time range badges, such as `09:00 - 13:00` and `14:00 - 17:00`. Schedule your installation within one of these windows to avoid conflicts.
+  </Tab>
+  <Tab title="Day with no specific slots">
+    The handyman is marked available for the day but has not defined exact windows. You can still assign work on this day, but coordinate directly with the handyman to confirm the time.
+  </Tab>
+  <Tab title="Day unavailable">
+    The handyman is not available on this day. The status badge shows **Busy** and the card notes *Unavailable for this day*. Avoid scheduling installations on unavailable days.
+  </Tab>
+</Tabs>
+
+## Related pages
+
+- [Manage your handyman team in the Partner Portal](/handymen/overview)
+- [Send messages to handymen directly from the portal](/handymen/messaging)

@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.source/
+
+# Local environment
+.env
+.env.local
+.env.*.local
+
+# OS/editor
+.DS_Store
+Thumbs.db

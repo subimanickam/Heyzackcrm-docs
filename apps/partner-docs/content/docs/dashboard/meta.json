@@ -1,0 +1,8 @@
+{
+  "title": "Dashboard",
+  "pages": [
+    "overview",
+    "kpis",
+    "partner-tier"
+  ]
+}

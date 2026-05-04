@@ -1,0 +1,16 @@
+{
+  "title": "HeyZack Docs",
+  "pages": [
+    "index",
+    "quickstart",
+    "authentication",
+    "---Product Modules---",
+    "dashboard",
+    "customers",
+    "installations",
+    "handymen",
+    "inventory",
+    "reports",
+    "settings"
+  ]
+}

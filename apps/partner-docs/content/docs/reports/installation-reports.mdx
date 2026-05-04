@@ -1,0 +1,95 @@
+---
+title: "Installation performance reports and analytics"
+description: "Track total installations, completion rates, average job time, and daily trends to understand your installation pipeline's operational health."
+---
+
+The Installation Reports tab gives you a detailed picture of how your installation operations are performing over any date range. It pulls live data from every installation record in your account and surfaces four key metrics at the top, followed by trend charts and a device type breakdown. Use this tab to understand whether your team is keeping up with demand, how long jobs are taking, and which product categories are seeing the most activity.
+
+## Key metrics
+
+The top of the Installations tab shows four summary cards that update based on your selected date range.
+
+| Metric | What it measures |
+|---|---|
+| **Total Installations** | The total count of all installation records in your account for the selected period, regardless of status. |
+| **Completion Rate** | The percentage of completed installations out of your total. Calculated as completed ÷ total × 100. |
+| **Avg. Installation Time** | The average number of hours a job takes from start to finish. The system currently tracks a baseline of 2.2 hours across installation types. |
+| **Pending Backlog** | The count of installations that are not yet completed or cancelled — this includes everything still in progress or scheduled. |
+
+<Note>
+  The completion rate only counts installations that have been fully completed. Scheduled and in-progress jobs are excluded from the numerator but included in the total, which means a large pipeline of upcoming jobs will naturally lower this percentage.
+</Note>
+
+## Status breakdown
+
+Your installations fall into three primary status groups:
+
+- **Completed** — Finished jobs that customers have approved. These count toward your completion rate.
+- **Scheduled** — Jobs that have a confirmed date and assigned handyman but have not yet started.
+- **Pending / In progress** — Everything else that is not completed or cancelled, including jobs actively underway or awaiting assignment.
+
+<Tip>
+  Keep an eye on your **Pending Backlog** metric. A growing backlog relative to your team size can be an early warning that you need to add handyman capacity or adjust scheduling.
+</Tip>
+
+## Filtering by date range
+
+The date range selector at the top of the Reports page controls which installations appear in this tab. Switch between **Today**, **Last 7 days**, **Last 30 days**, **Last 90 days**, or a **Custom range** to focus on the period that matters for your analysis.
+
+<Steps>
+  <Step title="Open the Reports page">
+    Select **Reports** from the left sidebar. The Installations tab opens by default.
+  </Step>
+  <Step title="Choose a date range">
+    In the date range bar, select one of the preset options or click **Custom** to open the calendar picker and choose a specific start and end date.
+  </Step>
+  <Step title="Review the updated metrics">
+    The four summary cards and both charts refresh automatically to reflect the selected period.
+  </Step>
+</Steps>
+
+## Daily installation trends chart
+
+The line chart below the summary cards plots your completed and scheduled installations day by day across the selected date range. Two lines run in parallel:
+
+- **Completed** (green) — installations finished each day
+- **Scheduled** (blue) — installations that were scheduled for each day
+
+Use this chart to spot patterns: days with high scheduled counts but low completed counts may indicate rescheduling or handyman availability issues. A rising completed line with a flat scheduled line suggests your team is working through the existing backlog.
+
+## Device type distribution
+
+The pie chart alongside the trend chart shows how installations are distributed by product type — for example, smart locks, cameras, thermostats, and sensor packages. Each slice represents one product category, sized by the total quantity installed across all jobs in the selected period.
+
+Use this chart to understand which product types drive the most installation volume. If a single category dominates, ensure your handymen hold the relevant certifications and that you have adequate inventory on hand.
+
+## Understanding your completion rate
+
+A healthy completion rate depends on the mix of completed, in-progress, and scheduled jobs in your pipeline.
+
+<AccordionGroup>
+  <Accordion title="Why is my completion rate lower than expected?">
+    If you have recently added many new scheduled jobs, they increase the total count without yet adding to the completed count. This is normal during growth periods. Check back after those jobs are finished to see the rate recover.
+  </Accordion>
+  <Accordion title="How does average installation time affect my team's capacity?">
+    The average installation time of 2.2 hours means a single handyman can typically complete three to four jobs in a standard working day. If your backlog is growing, compare it against your team's total available hours to determine whether you need additional handymen.
+  </Accordion>
+  <Accordion title="What counts as part of the pending backlog?">
+    Any installation that is not completed or cancelled counts toward the pending backlog — including jobs that are scheduled for future dates. This gives you a forward-looking measure of work committed.
+  </Accordion>
+</AccordionGroup>
+
+<Warning>
+  A completion rate below 70% over a sustained period may affect your partner standing. If you see a persistent decline, review your scheduling practices and handyman availability. Contact your HeyZack account manager if you need support.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Reports overview" icon="chart-bar" href="/reports/overview">
+    Learn about all five report categories and how to export your data.
+  </Card>
+  <Card title="Financial reports" icon="dollar-sign" href="/reports/financial-reports">
+    Review revenue trends, commissions, and partner tier progress.
+  </Card>
+</CardGroup>

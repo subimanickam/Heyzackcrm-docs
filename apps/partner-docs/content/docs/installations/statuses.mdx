@@ -1,0 +1,124 @@
+---
+title: "Installation status workflow from scheduled to approved"
+description: "Understand every installation status, how they group together in the portal overview, and which statuses allow actions like assigning or rejecting."
+---
+
+Every installation in the Partner Portal has a status that tells you exactly where the job stands. Statuses advance automatically as the handyman completes each stage of the work, and a few statuses are set by actions you take in the portal — such as assigning a handyman or rejecting a job. Understanding the full status list helps you monitor your pipeline accurately and take the right action at the right time.
+
+## All statuses
+
+<AccordionGroup>
+  <Accordion title="SCHEDULED">
+    The installation has been created and a date has been set, but no handyman has been assigned yet. This is the starting status for every new installation.
+  </Accordion>
+  <Accordion title="INSTALLER_ASSIGNED">
+    A handyman has been assigned to the installation. The job is confirmed and waiting for the handyman to travel to the site.
+  </Accordion>
+  <Accordion title="EN_ROUTE">
+    The assigned handyman has departed and is traveling to the customer's address.
+  </Accordion>
+  <Accordion title="INSTALLATION_IN_PROGRESS">
+    The handyman has arrived on site and active installation work is underway.
+  </Accordion>
+  <Accordion title="INSTALLATION_COMPLETED">
+    The physical installation work is finished. The job is moving into the contract and sign-off phase.
+  </Accordion>
+  <Accordion title="CONTRACT_SENT">
+    The installation contract has been sent to the customer for review and signature.
+  </Accordion>
+  <Accordion title="CONTRACT_SIGNED">
+    The customer has signed the contract. The job is pending final customer approval.
+  </Accordion>
+  <Accordion title="CUSTOMER_APPROVED">
+    The customer has formally approved the completed installation. This is the successful terminal status for a job.
+  </Accordion>
+  <Accordion title="CANCELLED">
+    The installation was cancelled. No further actions can be taken on this record.
+  </Accordion>
+  <Accordion title="REJECTED">
+    The installation was rejected by the partner. No further actions can be taken on this record. A rejection reason is recorded on the installation.
+  </Accordion>
+</AccordionGroup>
+
+## How statuses group in the portal
+
+The Installations page groups individual statuses into five broader categories for the overview cards and the status filter dropdown. This makes it easier to understand your pipeline at a glance without counting individual statuses.
+
+| Group | Statuses included |
+|---|---|
+| **Scheduled** | `SCHEDULED`, `INSTALLER_ASSIGNED` |
+| **En Route** | `EN_ROUTE` |
+| **In Progress** | `INSTALLATION_IN_PROGRESS`, `INSTALLATION_COMPLETED`, `CONTRACT_SENT`, `CONTRACT_SIGNED` |
+| **Approved** | `CUSTOMER_APPROVED` |
+| **Rejected** | `CANCELLED`, `REJECTED` |
+
+<Note>
+  When you filter the installation list by status group, all individual statuses within that group are included. For example, filtering by **In Progress** shows jobs in any of the four statuses that make up that group.
+</Note>
+
+## Typical workflow progression
+
+A successful installation moves through the following sequence:
+
+<Steps>
+  <Step title="Scheduled">
+    You create the installation record. Status: `SCHEDULED`.
+  </Step>
+  <Step title="Installer assigned">
+    You assign a handyman from the installation list or detail page. Status: `INSTALLER_ASSIGNED`.
+  </Step>
+  <Step title="En route">
+    The handyman confirms they are traveling to the site. Status: `EN_ROUTE`.
+  </Step>
+  <Step title="Installation in progress">
+    The handyman arrives and begins work. Status: `INSTALLATION_IN_PROGRESS`.
+  </Step>
+  <Step title="Installation completed">
+    Physical work finishes. Status: `INSTALLATION_COMPLETED`.
+  </Step>
+  <Step title="Contract sent">
+    The contract is sent to the customer. Status: `CONTRACT_SENT`.
+  </Step>
+  <Step title="Contract signed">
+    The customer signs the contract. Status: `CONTRACT_SIGNED`.
+  </Step>
+  <Step title="Customer approved">
+    The customer gives final approval. Status: `CUSTOMER_APPROVED`. The job is complete.
+  </Step>
+</Steps>
+
+## Which statuses allow actions
+
+Not every action is available at every stage. The table below summarizes what you can do based on the current status.
+
+| Status | Assign handyman | Reassign handyman | Reject installation |
+|---|---|---|---|
+| `SCHEDULED` | Yes | No | Yes |
+| `INSTALLER_ASSIGNED` | No | Yes | No |
+| `EN_ROUTE` | No | Yes | No |
+| `INSTALLATION_IN_PROGRESS` | No | No | No |
+| `INSTALLATION_COMPLETED` | No | No | No |
+| `CONTRACT_SENT` | No | No | No |
+| `CONTRACT_SIGNED` | No | No | No |
+| `CUSTOMER_APPROVED` | No | No | No |
+| `CANCELLED` | No | No | No |
+| `REJECTED` | No | No | No |
+
+<Warning>
+  Once an installation reaches `CANCELLED` or `REJECTED`, no further actions are available. If the job needs to proceed, create a new installation record for the customer.
+</Warning>
+
+<Tip>
+  The **Assign** and **Reject** buttons only appear on an installation row when the action is permitted for that status. If you do not see the button, the installation is in a state where that action is not allowed.
+</Tip>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Schedule an installation" icon="calendar-plus" href="/installations/scheduling">
+    Create a new installation and set the initial date
+  </Card>
+  <Card title="Assign a handyman" icon="hard-hat" href="/installations/handyman-assignment">
+    Assign or reassign a handyman to move the job forward
+  </Card>
+</CardGroup>

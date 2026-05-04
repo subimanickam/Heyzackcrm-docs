@@ -1,34 +1,61 @@
-# heyzackcrm-docs
+# HeyZack documents (monorepo)
 
-Documentation for my project
+Single repository containing both Unmint documentation sites:
 
-## Getting Started
+| App | Path | Default dev URL | Role |
+|-----|------|-----------------|------|
+| **Partner Portal docs** | `apps/partner-docs` | [http://localhost:3000](http://localhost:3000) | Partner / field operations documentation |
+| **CRM docs** | `apps/crm-docs` | [http://localhost:3001](http://localhost:3001) | HeyZack CRM (admin) documentation |
+
+This layout replaces maintaining two separate GitHub repositories ([Heyzack-documents](https://github.com/subimanickam/Heyzack-documents) and [Heyzackcrm-docs](https://github.com/subimanickam/Heyzackcrm-docs)) with one codebase. Archive or redirect the old repos to this monorepo when you are ready.
+
+## Prerequisites
+
+- Node.js 18+
+- npm 9+ (workspaces)
+
+## Install
+
+From the repository root:
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
-npm run dev
 ```
 
-Your docs will be available at [http://localhost:3000](http://localhost:3000)
+## Develop
 
-## Project Structure
+Run one site at a time (use two terminals for both):
 
-```
-├── app/                  # Next.js app directory
-├── content/
-│   └── docs/            # Your documentation (MDX files)
-├── lib/
-│   └── theme-config.ts  # Site configuration
-└── public/              # Static assets
+```bash
+npm run dev:partner
+npm run dev:crm
 ```
 
-## Writing Documentation
+Each app includes a **Partner | CRM** header switcher. Configure sibling URLs in each app’s `apps/*/ .env.local` (see `apps/crm-docs/.env.example` and `apps/partner-docs/.env.example`).
 
-Add MDX files to `content/docs/` to create new pages. The sidebar navigation is automatically generated based on your file structure.
+## Build
 
-## Built with Unmint
+```bash
+npm run build
+```
 
-This documentation site was created with [Unmint](https://github.com/gregce/unmint), a free and open-source documentation system.
+Or per workspace:
+
+```bash
+npm run build:partner
+npm run build:crm
+```
+
+## Project layout
+
+```
+apps/
+  partner-docs/   # Partner Portal documentation (formerly Heyzack-documents)
+  crm-docs/       # CRM documentation (formerly Heyzackcrm-docs)
+```
+
+Each `apps/*` folder is a standalone Next.js + Unmint app with its own `content/docs`, `app/`, and `package.json`.
+
+## License
+
+MIT — see `LICENSE` in the repository root.

@@ -1,0 +1,94 @@
+---
+title: "Assign and reassign handymen to installation jobs"
+description: "Assign a verified handyman to an open installation, reassign when plans change, and understand how assignment affects the installation status."
+---
+
+Every installation needs a handyman before work can begin on site. You can assign a handyman when you first schedule the installation, or come back to the installation list and assign one later. If plans change after an assignment is already in place, you can reassign the job to a different person — provided the installation is still in an active state.
+
+## When you can assign or reassign
+
+The assignment controls appear on an installation row based on the current situation:
+
+| Situation | Button shown |
+|---|---|
+| No handyman assigned and status is not Cancelled or Rejected | **Assign** |
+| Handyman already assigned and status is Installer Assigned or En Route | **Reassign** |
+| Status is Cancelled or Rejected | No assignment button — assignment is locked |
+
+<Note>
+  You cannot assign or reassign a handyman once an installation is cancelled or rejected. If you need to restart the job, create a new installation record.
+</Note>
+
+## Assign a handyman
+
+<Steps>
+  <Step title="Find the installation">
+    On the Installations page, locate the installation that needs a handyman. Installations without a handyman assigned show "No handyman assigned" in the handyman column and display an **Assign** button.
+  </Step>
+  <Step title="Click Assign">
+    Click the **Assign** button on the installation row. The handyman assignment modal opens.
+  </Step>
+  <Step title="Choose how to assign">
+    The modal gives you two options:
+
+    - **Assign to myself** — assigns the job directly to your own account. Use this when you are acting as the field technician for this job.
+    - **Assign to a handyman** — opens a dropdown to select from your team.
+
+    Select the option that applies.
+  </Step>
+  <Step title="Select a handyman (if assigning to your team)">
+    If you chose **Assign to a handyman**, a dropdown lists the verified handymen registered under your partner account. Select the handyman you want to assign. Only verified handymen appear in this list.
+  </Step>
+  <Step title="Confirm the assignment">
+    Click **Confirm** (for self-assignment) or **Assign** (for handyman assignment). The modal closes and the installation record updates to show the assigned handyman. The installation status advances to `INSTALLER_ASSIGNED`.
+  </Step>
+</Steps>
+
+## Reassign a handyman
+
+You can reassign a job as long as the installation status is **Installer Assigned** or **En Route**. Once the installation moves further along the workflow, the reassign option is no longer available.
+
+<Steps>
+  <Step title="Find the installation">
+    Locate the installation in the list. Rows where reassignment is available show a **Reassign** button alongside the currently assigned handyman's name.
+  </Step>
+  <Step title="Click Reassign">
+    Click **Reassign**. The same handyman assignment modal opens with the same two options — assign to yourself or select a different handyman from the list.
+  </Step>
+  <Step title="Select the new assignee and confirm">
+    Choose the replacement handyman and click **Confirm** or **Assign**. The installation record updates immediately to show the new handyman.
+  </Step>
+</Steps>
+
+<Warning>
+  Reassigning a handyman does not automatically notify either the previous or new handyman. Contact both people directly to communicate the change.
+</Warning>
+
+## What happens after assignment
+
+When a handyman is successfully assigned, the installation status changes to **Installer Assigned**. This moves the installation into the **Scheduled** status group on the overview cards and in the status filter.
+
+From that point, the handyman drives further status updates as they travel to the site and carry out the work:
+
+1. The status moves to **En Route** when the handyman is traveling to the customer's address.
+2. Once on site, the status advances through the **In Progress** group as work progresses and contract steps are completed.
+3. After the customer signs off, the installation reaches **Customer Approved** status.
+
+See the [installation statuses reference](/installations/statuses) for the full list of statuses and their meanings.
+
+## The handyman assignment modal
+
+The assignment modal has two screens depending on your selection.
+
+<AccordionGroup>
+  <Accordion title="Assign to myself">
+    Selecting this option shows a confirmation panel displaying your own name and email address. Click **Confirm** to complete the assignment. This is useful when you personally carry out installations in addition to managing the portal.
+  </Accordion>
+  <Accordion title="Assign to a handyman">
+    Selecting this option shows a dropdown list of verified handymen under your account. Each entry shows the handyman's name and email address. Select a name from the list, then click **Assign** to complete the assignment.
+
+    <Note>
+      Only handymen whose accounts have been verified appear in the dropdown. If a team member is missing from the list, check their status in the Handymen section of the portal.
+    </Note>
+  </Accordion>
+</AccordionGroup>
