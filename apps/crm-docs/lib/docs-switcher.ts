@@ -1,9 +1,9 @@
 /**
  * Cross-link between Partner Portal docs and HeyZack CRM docs.
  *
- * In this repo (CRM docs), default `siteId` is `crm`.
- * Set NEXT_PUBLIC_DOCS_SITE to override (`partner` | `crm`).
- * Point the sibling app with NEXT_PUBLIC_PARTNER_DOCS_URL / NEXT_PUBLIC_CRM_DOCS_URL.
+ * This package is always the CRM docs site (`siteId` is fixed).
+ * Set NEXT_PUBLIC_PARTNER_DOCS_URL / NEXT_PUBLIC_CRM_DOCS_URL so the inactive tab
+ * points at the real sibling (defaults are localhost:3000 / :3001 for local dev).
  */
 
 export type DocsSiteId = 'partner' | 'crm'
@@ -18,7 +18,7 @@ export interface DocsSwitcherConfig {
 
 export function getDocsSwitcherConfig(): DocsSwitcherConfig {
   return {
-    siteId: (process.env.NEXT_PUBLIC_DOCS_SITE as DocsSiteId) || 'crm',
+    siteId: 'crm',
     partnerLabel: 'Partner',
     crmLabel: 'CRM',
     partnerUrl:
