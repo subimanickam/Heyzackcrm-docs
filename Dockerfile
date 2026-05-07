@@ -20,7 +20,7 @@ COPY . .
 
 RUN npm run build
 
-FROM base AS runner
+FROM base AS production
 
 ENV NODE_ENV=production
 ENV PORT=3000
