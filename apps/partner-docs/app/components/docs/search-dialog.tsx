@@ -3,12 +3,15 @@
 import { useDocsSearch } from 'fumadocs-core/search/client'
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { getDocsSearchUiCopy } from '@/lib/docs-nav-locale'
 
 export function SearchTrigger({ searchApi = '/api/search' }: { searchApi?: string }) {
   const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const pathname = usePathname() ?? ''
+  const ui = getDocsSearchUiCopy(pathname)
 
   useEffect(() => {
     setMounted(true)
@@ -40,7 +43,7 @@ export function SearchTrigger({ searchApi = '/api/search' }: { searchApi?: strin
         )}
       >
         <SearchIcon className="w-4 h-4 shrink-0" />
-        <span className="flex-1 text-left">Search documentation...</span>
+        <span className="flex-1 text-left">{ui.triggerPlaceholder}</span>
         <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 rounded bg-background/80 text-xs font-mono text-muted-foreground/60 border border-border/40">
           <span>⌘</span>K
         </kbd>
@@ -84,6 +87,8 @@ function HighlightedText({ text, query }: { text: string; query: string }) {
 
 function SearchDialog({ onClose, searchApi = '/api/search' }: SearchDialogProps) {
   const router = useRouter()
+  const pathname = usePathname() ?? ''
+  const ui = getDocsSearchUiCopy(pathname)
   const { search, setSearch, query } = useDocsSearch({ type: 'fetch', api: searchApi })
   const [selectedIndex, setSelectedIndex] = useState(0)
   const resultsRef = useRef<HTMLUListElement>(null)
@@ -170,14 +175,14 @@ function SearchDialog({ onClose, searchApi = '/api/search' }: SearchDialogProps)
         aria-labelledby="search-dialog-title"
       >
         <div className="bg-background border border-border rounded-xl shadow-2xl overflow-hidden">
-          <h2 id="search-dialog-title" className="sr-only">Search documentation</h2>
+          <h2 id="search-dialog-title" className="sr-only">{ui.dialogTitle}</h2>
           {/* Search input */}
           <div className="flex items-center gap-3 px-4 border-b border-border">
             <SearchIcon className="w-5 h-5 text-muted-foreground shrink-0" aria-hidden="true" />
             <input
               type="text"
-              aria-label="Search documentation"
-              placeholder="Search..."
+              aria-label={ui.inputAriaLabel}
+              placeholder={ui.inputPlaceholder}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="flex-1 py-4 bg-transparent text-foreground placeholder:text-muted-foreground text-base border-none outline-none focus:outline-none focus:ring-0 focus:border-none"
@@ -193,19 +198,20 @@ function SearchDialog({ onClose, searchApi = '/api/search' }: SearchDialogProps)
           <div className="max-h-[60vh] overflow-y-auto">
             {search.length === 0 ? (
               <div className="p-8 text-center text-muted-foreground">
-                <p>Start typing to search...</p>
+                <p>{ui.startTyping}</p>
               </div>
             ) : query.isLoading ? (
               <div className="p-8 text-center text-muted-foreground">
-                <p>Searching...</p>
+                <p>{ui.searching}</p>
               </div>
             ) : results.length > 0 ? (
-              <ul ref={resultsRef} role="listbox" aria-label="Search results" className="py-2">
+              <ul ref={resultsRef} role="listbox" aria-label={ui.resultsAriaLabel} className="py-2">
                 {results.map((result, index) => {
                   // Build breadcrumb path
-                  const breadcrumbPath = result.breadcrumbs && result.breadcrumbs.length > 0
-                    ? `Documentation > ${result.breadcrumbs.join(' > ')}`
-                    : 'Documentation'
+                  const breadcrumbPath =
+                    result.breadcrumbs && result.breadcrumbs.length > 0
+                      ? `${ui.breadcrumbRoot}${ui.breadcrumbSep}${result.breadcrumbs.join(ui.breadcrumbSep)}`
+                      : ui.breadcrumbRoot
 
                   return (
                     <li key={result.id}>
@@ -238,7 +244,7 @@ function SearchDialog({ onClose, searchApi = '/api/search' }: SearchDialogProps)
               </ul>
             ) : (
               <div className="p-8 text-center text-muted-foreground">
-                <p>No results found for &quot;{search}&quot;</p>
+                <p>{ui.noResults(search)}</p>
               </div>
             )}
           </div>
@@ -249,15 +255,15 @@ function SearchDialog({ onClose, searchApi = '/api/search' }: SearchDialogProps)
               <span className="flex items-center gap-1">
                 <kbd className="px-1.5 py-0.5 rounded bg-muted border border-border font-mono">↑</kbd>
                 <kbd className="px-1.5 py-0.5 rounded bg-muted border border-border font-mono">↓</kbd>
-                <span className="ml-1">to navigate</span>
+                <span className="ml-1">{ui.navigateHint}</span>
               </span>
               <span className="flex items-center gap-1">
                 <kbd className="px-1.5 py-0.5 rounded bg-muted border border-border font-mono">↵</kbd>
-                <span className="ml-1">to select</span>
+                <span className="ml-1">{ui.selectHint}</span>
               </span>
               <span className="flex items-center gap-1">
                 <kbd className="px-1.5 py-0.5 rounded bg-muted border border-border font-mono">esc</kbd>
-                <span className="ml-1">to close</span>
+                <span className="ml-1">{ui.closeHint}</span>
               </span>
             </div>
           )}

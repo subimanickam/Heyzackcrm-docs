@@ -1,7 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { getOnThisPageLabel } from '@/lib/docs-nav-locale'
 import type { TOCItemType } from 'fumadocs-core/toc'
 
 interface DocsTOCProps {
@@ -9,6 +11,8 @@ interface DocsTOCProps {
 }
 
 export function DocsTOC({ toc }: DocsTOCProps) {
+  const pathname = usePathname() ?? ''
+  const onThisPage = getOnThisPageLabel(pathname)
   const [activeId, setActiveId] = useState<string>('')
 
   useEffect(() => {
@@ -36,7 +40,7 @@ export function DocsTOC({ toc }: DocsTOCProps) {
   return (
     <aside className="hidden xl:block w-56 shrink-0">
       <nav className="sticky top-36 max-h-[calc(100vh-10rem)] overflow-y-auto">
-        <p className="text-sm font-semibold text-foreground mb-4">On this page</p>
+        <p className="text-sm font-semibold text-foreground mb-4">{onThisPage}</p>
         <ul className="space-y-2 text-sm">
           {toc.map((item) => (
             <li key={item.url}>
