@@ -1,6 +1,7 @@
 import type { MDXComponents } from 'mdx/types'
 import Link from 'next/link'
 import Image from 'next/image'
+import { cn } from '@/lib/utils'
 
 // Component imports
 import { Card, CardGroup } from './card'
@@ -167,18 +168,22 @@ export function getMDXComponents(docsBase: DocsContentBase = '/docs'): MDXCompon
       }
       return <code className={className}>{children}</code>
     },
-    img: ({ src, alt, ...props }) => (
-      <span className="block my-6">
-        <Image
-          src={src || ''}
-          alt={alt || ''}
-          width={800}
-          height={400}
-          className="rounded-lg max-w-full h-auto"
-          {...props}
-        />
-      </span>
-    ),
+    img: ({ src, alt, className, width, height, ...props }) => {
+      const w = width != null ? Number(width) : 800
+      const h = height != null ? Number(height) : 450
+      return (
+        <span className="block my-6">
+          <Image
+            src={src || ''}
+            alt={alt || ''}
+            width={w}
+            height={h}
+            className={cn('rounded-lg max-w-full h-auto', className)}
+            {...props}
+          />
+        </span>
+      )
+    },
     strong: ({ children }) => (
       <strong className="font-semibold text-foreground">{children}</strong>
     ),
